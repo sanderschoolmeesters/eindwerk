@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    @if ($user = Auth::user())
+                    @if (Auth::user())
                         U bent ingelogged!
                     @else
                         Log in of maak een account aan.

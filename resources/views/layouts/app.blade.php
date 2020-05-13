@@ -55,12 +55,32 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                
+                                    {{-- voor user --}}
+                                    @if (Auth::user()->role_id == 2)
+                                    <a class="dropdown-item" href="{{ url('/userTicket') }}">
+                                        Maak een ticket aan?
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/userProfile') }}">
+                                        Mijn profiel
+                                    </a>
+                                    @endif
+
+                                    {{-- voor admin --}}
+                                    @if (Auth::user()->role_id == 1)
+                                    <a class="dropdown-item" href="{{ url('/adminTicket') }}">
+                                        Actieve tickets
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/adminProfile') }}">
+                                        Mijn admin profiel
+                                    </a>
+                                    @endif
+                                    {{-- logout --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
