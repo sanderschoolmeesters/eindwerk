@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if ($user = Auth::user())
+                        U bent ingelogged!
+                    @else
+                        Log in of maak een account aan.
+                    @endif
+                
                 </div>
             </div>
         </div>
