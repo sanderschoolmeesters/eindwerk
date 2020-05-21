@@ -17,7 +17,7 @@
                     @if (Auth::user())
                         U bent ingelogged!
                     @else
-                        Log in of maak een account aan.
+                        <a href="/login">Log in</a> of <a href="/register">maak een account aan.</a>
                     @endif
                 
                 </div>
