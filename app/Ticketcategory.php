@@ -8,6 +8,6 @@ class Ticketcategory extends Model
 {
     public function ticket()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->belongstomany('App\Ticket');
     }
 }
