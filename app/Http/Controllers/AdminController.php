@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Review;
 
 class AdminController extends Controller
 {
@@ -12,8 +13,8 @@ class AdminController extends Controller
     }
 
     public function showProfile(){
-        $loggedInUser = auth()->user();
-         $user =  User::find($loggedInUser->id);
+        $loggedInAdmin = auth()->user();
+        $user =  User::find($loggedInAdmin->id);
         return view('adminProfile')->with('user', $user);
     }
 
@@ -40,5 +41,22 @@ class AdminController extends Controller
     }
 
         return redirect('/adminProfile')->with('success', 'Uw profielfoto is aangepast');
+    }
+
+    public function review(Request $request) {
+        //validatie
+        $this->validate($request, [
+            'review' => 'nullable',
+            'stars' => 'required'
+        ]);
+
+        // opslaan database
+        $review = new Review();
+        $review->review = $request->input('review');
+        $review->stars = $request->input('stars');
+        $review->author_id = auth()->user()->id;
+        $review->save();
+
+        return redirect('/adminProfile')->with('success', 'Review achtergelaten!');
     }
 }

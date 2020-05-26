@@ -30,9 +30,11 @@ Route::get('/userProfile', 'UserController@showProfile')->middleware(['auth', 'a
 
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 
-Route::get('/adminProfile', 'AdminController@showProfile')->middleware(['auth', 'auth.admin']);
+Route::get('/adminProfile', 'AdminController@showProfile')->middleware('auth');
 
-Route::post('/adminProfile', 'AdminController@editImage')->middleware(['auth', 'auth.admin']);
+Route::post('/adminProfile', 'AdminController@editImage')->middleware('auth');
+
+Route::post('/adminProfile/review', 'AdminController@review')->middleware('auth');
 
 Route::get('/admin', function () {
     return view('welcome');

@@ -44,22 +44,26 @@
                 <div class="row no-gutters">
                   <div class="col-md-8">
                     <div class="card-body">
+                      {{-- gewoon mijn reviews van maken, want user kan hier niet opkomen,
+                      anders foute data(logged in user) --}}
                       <h5 class="card-title">Reviews</h5>
                       <p class="card-text"><b>Beoordeling van ... </b>: beoordleing</p>
+                      werkt niet..... admin_id meegeven vanuit eerdere views???
                       <br>
 
                       @if (auth()->user()->role_id == 2)
-                      <form method="POST" action="/adminProfile" enctype="multipart/form-data" class="form-group">
+                      <form method="POST" action="/adminProfile/review" enctype="multipart/form-data" class="form-group">
                         @csrf
                         Beoordeling: <input name="review" type="text" class="form-control">
                         <br>
-                        Aantal sterren: <select name="stars" >
+                        Aantal sterren: 
+                        <select name="stars" >
                             <option value="1">&#9733;</option>
                             <option value="2">&#9733;&#9733;</option>
                             <option value="3">&#9733;&#9733;&#9733;</option>
                             <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
                             <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                          </select>
+                        </select>
                         <br>
                         <hr>
                         <button name="submit" type="submit" class="btn btn-primary">Verstuur review</button>
