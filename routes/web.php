@@ -32,6 +32,8 @@ Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'a
 
 Route::get('/adminProfile', 'AdminController@showProfile')->middleware(['auth', 'auth.admin']);
 
+Route::post('/adminProfile', 'AdminController@editImage')->middleware(['auth', 'auth.admin']);
+
 Route::get('/admin', function () {
     return view('welcome');
 });

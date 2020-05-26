@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameCategory extends Migration
+class AddImageToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class RenameCategory extends Migration
      */
     public function up()
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->renameColumn('category','ticketcategory_id');
-        });
+        Schema::table('users', function (Blueprint $table) {
+                $table->string('image');
+            });
     }
 
     /**
@@ -25,6 +25,9 @@ class RenameCategory extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            Schema::dropIfExists('image');
+
+        });
     }
 }
