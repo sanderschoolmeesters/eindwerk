@@ -8,6 +8,11 @@ class Ticket extends Model
 {
     public function ticketcategory()
     {
-        return $this->belongstoone('App\Ticketcategory');
+        return $this->belongsTo('App\Ticketcategory');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

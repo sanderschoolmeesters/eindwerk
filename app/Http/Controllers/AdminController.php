@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Review;
+use App\Ticket;
 
 class AdminController extends Controller
 {
     public function showTicket(){
-        return view('adminTicket');
+        $tickets = Ticket::get();
+        return view('adminTicket')->with('tickets', $tickets);
     }
 
     public function showProfile(){
