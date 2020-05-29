@@ -16,5 +16,9 @@ class UserController extends Controller
 
     public function showTickets(){
         return view('userTickets');
+
+        $tickets = DB::select('select * from tickets');
+
+        return view('userTickets', ['tickets' => $tickets]);
     }
 }
