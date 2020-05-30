@@ -47,12 +47,28 @@
                       {{-- gewoon mijn reviews van maken, want user kan hier niet opkomen,
                       anders foute data(logged in user) --}}
                       <h5 class="card-title">Reviews</h5>
-                      <p class="card-text"><b>Beoordeling van ... </b>: beoordleing</p>
-                      werkt niet..... admin_id meegeven vanuit eerdere views???
+                      {{-- niet zichtbaar voor admins, anders error --}}
+                      @if (auth()->user()->role_id != 1)
+                      {{-- reviews --}}
+                      @foreach ($reviews as $review)
+                      <p class="card-text"><b>Beoordeling</b>: {{$review->review}}</p>
+                      <select name="stars" >
+                        <option @if ($review->stars == 1) selected="selected" @endif disabled value="1">&#9733;</option>
+                        <option @if ($review->stars == 2) selected="selected" @endif disabled value="2">&#9733;&#9733;</option>
+                        <option @if ($review->stars == 3) selected="selected" @endif disabled value="3">&#9733;&#9733;&#9733;</option>
+                        <option @if ($review->stars == 4) selected="selected" @endif disabled value="4">&#9733;&#9733;&#9733;&#9733;</option>
+                        <option @if ($review->stars == 5) selected="selected" @endif disabled value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                      </select>
                       <br>
-
+                      <br>
+                      @endforeach
+                      @endif
+                      {{-- niet zichtbaar voor users --}}
+                      @if (auth()->user()->role_id != 2)
+                      <a href="#">Bekijk hier jouw reviews</a>  
+                      @endif
                       @if (auth()->user()->role_id == 2)
-                      <form method="POST" action="/adminProfile/review" enctype="multipart/form-data" class="form-group">
+                      <form method="POST" action="/adminProfile/review/{{$user->id}}" enctype="multipart/form-data" class="form-group">
                         @csrf
                         Beoordeling: <input name="review" type="text" class="form-control">
                         <br>

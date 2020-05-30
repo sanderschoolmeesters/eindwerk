@@ -34,7 +34,15 @@ Route::get('/adminProfile', 'AdminController@showProfile')->middleware('auth');
 
 Route::post('/adminProfile', 'AdminController@editImage')->middleware('auth');
 
-Route::post('/adminProfile/review', 'AdminController@review')->middleware('auth');
+Route::post('/adminProfile/review/{user_id}', 'AdminController@review')->middleware('auth');
+
+Route::get('/chatAdmin/{ticket_id}', 'AdminController@chatAdmin');
+
+Route::post('/chatAdmin/{ticket_id}', 'AdminController@sendChat');
+
+Route::delete('/chatAdmin/{ticket_id}', 'AdminController@deleteChat');
+
+Route::get('/adminProfile/guest/{user_id}', 'AdminController@adminProfileGuest');
 
 Route::get('/admin', function () {
     return view('welcome');

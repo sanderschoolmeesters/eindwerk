@@ -22,15 +22,14 @@
                 <tbody>
                   @foreach ($tickets as $ticket)
                   <tr>
-                  <td>{{$ticket->id}}</td>
+                    <td>{{$ticket->id}}</td>
                     <td>{{$ticket->title}}</td>
                     <td>{{$ticket->ticketcategory->name}}</td>
-                    <td><button>buuhww</button></td>
+                  <td><a href="/chatAdmin/{{$ticket->id}}" class="btn btn-primary">Ga naar chat</a></td>
                   </tr>
                   @endforeach
                 </tbody>
-              </table>
-              
+              </table>  
         </div>
     </div>
 </div>
