@@ -44,6 +44,8 @@ Route::delete('/chatAdmin/{ticket_id}', 'AdminController@deleteChat');
 
 Route::get('/adminProfile/guest/{user_id}', 'AdminController@adminProfileGuest');
 
+Route::get('/adminReviews/{user_id}', 'AdminController@showReviewsForAdmin')->middleware(['auth', 'auth.admin']);
+
 Route::get('/admin', function () {
     return view('welcome');
 });

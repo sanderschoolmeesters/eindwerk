@@ -97,9 +97,15 @@ class AdminController extends Controller
     }
 
     public function adminProfileGuest($user_id){
-       $admin = User::find($user_id);
+       $user = User::find($user_id);
        $reviews = Review::where('admin_id', $user_id)->get();
 
-       return view('adminProfile')->with('user', $admin)->with('reviews', $reviews);
+       return view('adminProfile')->with('user', $user)->with('reviews', $reviews);
+    }
+
+    public function showReviewsForAdmin($user_id){
+        $reviews = Review::where('admin_id', $user_id)->get();
+
+        return view('adminReviews')->with('reviews', $reviews);
     }
 }

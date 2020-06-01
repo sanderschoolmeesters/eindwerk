@@ -65,7 +65,7 @@
                       @endif
                       {{-- niet zichtbaar voor users --}}
                       @if (auth()->user()->role_id != 2)
-                      <a href="#">Bekijk hier jouw reviews</a>  
+                    <a href="/adminReviews/{{$user->id}}">Bekijk hier jouw reviews</a>  
                       @endif
                       @if (auth()->user()->role_id == 2)
                       <form method="POST" action="/adminProfile/review/{{$user->id}}" enctype="multipart/form-data" class="form-group">
