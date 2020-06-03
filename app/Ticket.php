@@ -15,4 +15,12 @@ class Ticket extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    protected $fillable =[
+        'id',
+        'ticketcategory_id',
+        'title',
+        'question',
+        'user_id'
+    ];
 }
