@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/userTicket', 'UserController@makeTicket')->middleware(['auth', 'auth.user']);
+Route::post('/userTickets', 'UserController@makeTicket')->middleware(['auth', 'auth.user']);
 
 Route::get('/userTickets', 'UserController@showTickets')->middleware(['auth', 'auth.user']);
 
@@ -31,6 +31,8 @@ Route::get('/userProfile', 'UserController@showProfile')->middleware(['auth', 'a
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 
 Route::get('/adminProfile', 'AdminController@showProfile')->middleware('auth');
+
+Route::get('/userTicket', 'UserController@cat')->middleware('auth');
 
 Route::post('/adminProfile', 'AdminController@editImage')->middleware('auth');
 
