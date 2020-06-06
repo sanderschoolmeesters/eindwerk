@@ -17,7 +17,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="storage/userimage/{{$user->image}}" class="card-img" alt="...">
+                    <img src="storage/userimage/{{$user->image}}" class="card-img" alt="admin image">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -44,8 +44,6 @@
                 <div class="row no-gutters">
                   <div class="col-md-8">
                     <div class="card-body">
-                      {{-- gewoon mijn reviews van maken, want user kan hier niet opkomen,
-                      anders foute data(logged in user) --}}
                       <h5 class="card-title">Reviews</h5>
                       {{-- niet zichtbaar voor admins, anders error --}}
                       @if (auth()->user()->role_id != 1)

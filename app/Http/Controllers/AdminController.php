@@ -7,6 +7,8 @@ use App\User;
 use App\Review;
 use App\Ticket;
 use App\Chat;
+use App\Mail\NewAnswer;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -15,11 +17,13 @@ class AdminController extends Controller
         return view('adminTicket')->with('tickets', $tickets);
     }
 
+    
     public function showProfile(){
         $user =  User::find(auth()->user()->id);
 
         return view('adminProfile')->with('user', $user);
     }
+
 
     public function editImage(Request $request){
         //validatie
@@ -46,6 +50,7 @@ class AdminController extends Controller
         return redirect('/adminProfile')->with('success', 'Uw profielfoto is aangepast');
     }
 
+
     public function review(Request $request, $user_id) {
         //validatie
         $this->validate($request, [
@@ -61,8 +66,9 @@ class AdminController extends Controller
         $review->admin_id = $user_id;
         $review->save();
 
-        return redirect('/')->with('success', 'Review achtergelaten, route nog veranderen!');
+        return redirect('/')->with('success', 'Review achtergelaten!');
     }
+
 
     public function chatAdmin($ticket_id){
         $currentTicket = Ticket::find($ticket_id);
@@ -71,7 +77,9 @@ class AdminController extends Controller
         return view('chatAdmin')->with('currentTicket', $currentTicket)->with('conversation', $returnChat);
     }
 
+
     public function sendChat(Request $request, $ticket_id){
+    // verstuur chat gedeelte
         $this->validate($request, [
             'chat' => 'required'
         ]);
@@ -83,11 +91,23 @@ class AdminController extends Controller
         $chat->chat_id = $ticket_id;
         $chat->save();
 
+    // mail naar user gedeelte
+        //als huidige verzender admin is, verstuur email naar user
+        if(auth()->user()->role_id == 1){
+            $currentTicket = Ticket::find($ticket_id);
+            $userToSend = User::find($currentTicket->user_id);
+            $messageUser = $request->input('chat');
+            $admin = auth()->user()->name;
+
+            Mail::to($userToSend->email)->send(new NewAnswer($currentTicket, $messageUser, $admin));
+        }
+
         $returnChat = Chat::where('chat_id', $ticket_id)->get();
         $currentTicket = Ticket::find($ticket_id);
 
         return view('chatAdmin')->with('conversation', $returnChat)->with('currentTicket', $currentTicket);
     }
+
 
     public function deleteChat($ticket_id){
         Ticket::find($ticket_id)->delete();
@@ -96,12 +116,14 @@ class AdminController extends Controller
         return redirect('/adminTicket')->with('success', 'Ticket afgehandeld!');
     }
 
+
     public function adminProfileGuest($user_id){
        $user = User::find($user_id);
        $reviews = Review::where('admin_id', $user_id)->get();
 
        return view('adminProfile')->with('user', $user)->with('reviews', $reviews);
     }
+
 
     public function showReviewsForAdmin($user_id){
         $reviews = Review::where('admin_id', $user_id)->get();

@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      {{-- terug naar actieve tickets --}}
+      <a href="/adminTicket" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Terug naar actieve tickets</a>
+      <br>
+      <br>
+      {{-- chat en ticket verwijderen enkel voor admin --}}
+       @if (auth()->user()->role_id == 1)                
+        <form method="post" action="/chatAdmin/{{$currentTicket->id}}">
+          @csrf
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" type="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Sluit ticket af</button>
+        </form>
+        @endif
+        <br>
+    </div>
+  </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -34,14 +53,6 @@
                 <input type="submit" class="btn btn-primary">
               </form>
               <br>
-            {{-- chat en ticket verwijderen enkel voor admin --}}
-            @if (auth()->user()->role_id == 1)                
-              <form method="post" action="/chatAdmin/{{$currentTicket->id}}">
-                @csrf
-                <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" type="delete" class="btn btn-danger">Sluit ticket af</button>
-              </form>
-            @endif
         </div>
     </div>
 </div>
