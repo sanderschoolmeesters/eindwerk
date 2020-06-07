@@ -24,7 +24,7 @@
                   <tr>
                     <td>{{$ticket->id}}</td>
                     <td>{{$ticket->title}}</td>
-                    <td>{{$ticket->ticketcategory_id->name}}</td>
+                    <td>{{$ticket->ticketcategory->name}}</td>
                   <td><a href="/chatAdmin/{{$ticket->id}}" class="btn btn-primary">Ga naar chat</a></td>
                   </tr>
                   @endforeach

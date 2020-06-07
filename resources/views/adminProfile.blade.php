@@ -17,7 +17,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="storage/userimage/{{$user->image}}" class="card-img" alt="admin image">
+                    <img src="/storage/userimage/{{$user->image}}" class="card-img" alt="admin image">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -45,7 +45,7 @@
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title">Reviews</h5>
-                      {{-- niet zichtbaar voor admins, anders error --}}
+                      {{-- niet zichtbaar voor admins --}}
                       @if (auth()->user()->role_id != 1)
                       {{-- reviews --}}
                       @foreach ($reviews as $review)
@@ -63,7 +63,7 @@
                       @endif
                       {{-- niet zichtbaar voor users --}}
                       @if (auth()->user()->role_id != 2)
-                    <a href="/adminReviews/{{$user->id}}">Bekijk hier jouw reviews</a>  
+                      <a href="/adminReviews/{{$user->id}}">Bekijk hier jouw reviews</a>  
                       @endif
                       @if (auth()->user()->role_id == 2)
                       <form method="POST" action="/adminProfile/review/{{$user->id}}" enctype="multipart/form-data" class="form-group">
