@@ -14,7 +14,7 @@
                 <h2>Ticket aanmaken</h2>
                      </div>
             <div class="row" >
-                <div class="">
+                <div class="justify-content-center">
                     <form method="post" action="/userTickets" enctype="multipart/form-data" style="width: 80%" >
 
                         @csrf

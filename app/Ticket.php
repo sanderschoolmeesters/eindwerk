@@ -23,4 +23,6 @@ class Ticket extends Model
         'question',
         'user_id'
     ];
+
+
 }

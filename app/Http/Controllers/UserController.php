@@ -37,6 +37,8 @@ class UserController extends Controller
 
                 }
 
+
+
     public function showProfile(){
         $loggedInUser = auth()->user();
         $user =  User::find($loggedInUser->id);
@@ -52,6 +54,37 @@ class UserController extends Controller
 
 
     }
+
+    public function index() {
+         $amount = Ticket::all();
+         return view('home', compact('$amount'));
+     }
+
+     public function editImageUser(Request $request){
+        //validatie
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        //image opslaan in de app
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('storage/userimage');
+            $image->move($destinationPath, $name);
+        }
+
+        //image path opslaan database
+        if ($request->hasFile('image')) {
+        $loggedInUser = auth()->user();
+        $user = User::find($loggedInUser->id);
+            $user->image = $name;
+        $user->save();
+    }
+
+        return redirect('/userProfile')->with('success', 'Uw profielfoto is aangepast');
+    }
+
 
     public function showTickets(){
         return view('userTickets');

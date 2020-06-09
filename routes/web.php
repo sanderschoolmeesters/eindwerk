@@ -28,9 +28,15 @@ Route::get('/userTickets', 'UserController@showTickets')->middleware(['auth', 'a
 
 Route::get('/userProfile', 'UserController@showProfile')->middleware(['auth', 'auth.user']);
 
+Route::post('/userProfile', 'UserController@editImageUser')->middleware('auth');
+
 Route::get('/home', 'UserController@homeProfile')->middleware('auth');
 
 Route::get('/', 'UserController@homeProfile')->middleware('auth');
+
+// Route::get('/home', 'UserController@index')->middleware('auth');
+
+// Route::get('/', 'UserController@index')->middleware('auth');
 
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 
