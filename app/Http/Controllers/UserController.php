@@ -45,11 +45,18 @@ class UserController extends Controller
 
     }
 
+    public function homeProfile(){
+        $loggedInUser = auth()->user();
+        $user =  User::find($loggedInUser->id);
+        return view('home')->with('user', $user);
+
+
+    }
+
     public function showTickets(){
         return view('userTickets');
 
-        $tickets = DB::select('select * from tickets');
-
+        $tickets = Ticket::where('user_id', auth()->user()->id);
         return view('userTickets', ['tickets' => $tickets]);
     }
 }

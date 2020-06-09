@@ -28,6 +28,10 @@ Route::get('/userTickets', 'UserController@showTickets')->middleware(['auth', 'a
 
 Route::get('/userProfile', 'UserController@showProfile')->middleware(['auth', 'auth.user']);
 
+Route::get('/home', 'UserController@homeProfile')->middleware('auth');
+
+Route::get('/', 'UserController@homeProfile')->middleware('auth');
+
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 
 Route::get('/adminProfile', 'AdminController@showProfile')->middleware('auth');
