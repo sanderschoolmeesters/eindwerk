@@ -87,7 +87,7 @@ class UserController extends Controller
 
 
     public function showTickets(){
-        return view('userTickets');
+        $tickets = Ticket::where('user_id', auth()->user()->id);
 
         $tickets = Ticket::where('user_id', auth()->user()->id);
         return view('userTickets', ['tickets' => $tickets]);

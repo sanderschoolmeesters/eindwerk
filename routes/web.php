@@ -40,7 +40,7 @@ Route::get('/', 'UserController@homeProfile')->middleware('auth');
 
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 
-Route::get('/adminProfile', 'AdminController@showProfile')->middleware('auth');
+Route::get('/adminProfile', 'AdminController@showProfile')->middleware(['auth', 'auth.admin']);
 
 Route::get('/userTicket', 'UserController@cat')->middleware('auth');
 
@@ -48,13 +48,13 @@ Route::post('/adminProfile', 'AdminController@editImage')->middleware('auth');
 
 Route::post('/adminProfile/review/{user_id}', 'AdminController@review')->middleware('auth');
 
-Route::get('/chatAdmin/{ticket_id}', 'AdminController@chatAdmin');
+Route::get('/chatAdmin/{ticket_id}', 'AdminController@chatAdmin')->middleware('auth');
 
-Route::post('/chatAdmin/{ticket_id}', 'AdminController@sendChat');
+Route::post('/chatAdmin/{ticket_id}', 'AdminController@sendChat')->middleware('auth');
 
-Route::delete('/chatAdmin/{ticket_id}', 'AdminController@deleteChat');
+Route::delete('/chatAdmin/{ticket_id}', 'AdminController@deleteChat')->middleware('auth');
 
-Route::get('/adminProfile/guest/{user_id}', 'AdminController@adminProfileGuest');
+Route::get('/adminProfile/guest/{user_id}', 'AdminController@adminProfileGuest')->middleware('auth');
 
 Route::get('/adminReviews/{user_id}', 'AdminController@showReviewsForAdmin')->middleware(['auth', 'auth.admin']);
 
