@@ -25,6 +25,7 @@
                       <p class="card-text"><b>Naam: </b> {{$user->name}}</p>
                       <p class="card-text"><b>E-mail: </b> {{$user->email}}</p>
                       <p class="card-text"><b>Actief sinds: </b> {{$user->created_at}}</p>
+                      <p class="card-text"><b>Aantal opgeloste tickets: </b> {{count($compTicket)}}</p>
                       <br>
                       <hr>
                       @if (auth()->user()->role_id == 1)
@@ -43,6 +44,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-8">
+                    {{-- reviews --}}
                     <div class="card-body">
                       <h5 class="card-title">Reviews</h5>
                       {{-- niet zichtbaar voor admins --}}

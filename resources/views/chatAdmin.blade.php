@@ -37,11 +37,20 @@
             @foreach ($conversation as $convo)
                 {{-- Huidig ingeloggde gebruiker eigen naam niet klikbaar maken + admin niks klikbaar --}}
                 @if (auth()->user()->id != $convo->user->id && auth()->user()->role_id == 2)
-                  <p><a href="/adminProfile/guest/{{$convo->user->id}}">
-                  <b>{{$convo->user->name}}</b>
-                  </a>: {{$convo->conversation}}</p>
+                  <p>
+                    <a href="/adminProfile/guest/{{$convo->user->id}}">
+                    <b>{{$convo->user->name}}</b>
+                    </a>: {{$convo->conversation}}
+                    <br>
+                    <small>{{$convo->created_at}}</small>
+                  </p>
                 @else
-                  <b>{{$convo->user->name}}</b>: {{$convo->conversation}}</p>
+                  <p>
+                    <b>{{$convo->user->name}}</b>: 
+                    {{$convo->conversation}}
+                    <br>
+                    <small>{{$convo->created_at}}</small>
+                  </p>
                 @endif
               @endforeach
           </div>

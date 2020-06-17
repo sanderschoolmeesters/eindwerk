@@ -7,6 +7,7 @@ use App\User;
 use App\Review;
 use App\Ticket;
 use App\Chat;
+use App\CompletedTicket;
 use App\Mail\NewAnswer;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,8 +21,9 @@ class AdminController extends Controller
     
     public function showProfile(){
         $user =  User::find(auth()->user()->id);
+        $compTicket = CompletedTicket::where('admin_id', auth()->user()->id)->get();
 
-        return view('adminProfile')->with('user', $user);
+        return view('adminProfile')->with('user', $user)->with('compTicket', $compTicket);
     }
 
 
@@ -110,6 +112,14 @@ class AdminController extends Controller
 
 
     public function deleteChat($ticket_id){
+        // completed tickets aanmaken
+        $compTicket = New CompletedTicket;
+        $compTicket->ticket_id = $ticket_id;
+        $compTicket->admin_id = auth()->user()->id;
+        $compTicket->save();
+
+
+        // ticket + chat verwijderen, kan eventueel niet verwijderen...
         Ticket::find($ticket_id)->delete();
         Chat::where('chat_id', $ticket_id)->delete();
 
@@ -120,8 +130,9 @@ class AdminController extends Controller
     public function adminProfileGuest($user_id){
        $user = User::find($user_id);
        $reviews = Review::where('admin_id', $user_id)->get();
+       $compTicket = CompletedTicket::where('admin_id', $user_id)->get();
 
-       return view('adminProfile')->with('user', $user)->with('reviews', $reviews);
+       return view('adminProfile')->with('user', $user)->with('reviews', $reviews)->with('compTicket', $compTicket);
     }
 
 

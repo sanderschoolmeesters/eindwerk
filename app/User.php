@@ -46,4 +46,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany('App\Chat');
     }
+
+    public function completedticket()
+    {
+        return $this->hasMany('App\CompletedTicket');
+    }
 }
