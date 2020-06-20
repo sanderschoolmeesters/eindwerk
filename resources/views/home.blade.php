@@ -35,13 +35,21 @@
 
                     <div>aantal open tickets : {{count($amount)}}</div>
 
-
+                        <h2>laatse tickets</h2>
                     @foreach ($last as $A)
 
+                    <div class="card">
+                        <div class="card-header">
+                            Ticket:{{ $A->id }}
+                          </div>
+                        <div class="card-body">
+                    <div>Tittle: {{$A->title}}</div>
+                    {{-- <div>Categorie: {{ $A->ticketcategory->name }}</div> --}}
+                    <div>Question: {{$A->question}}</div>
+                    {{-- <a href="/chatAdmin/{{$tickets->id}}" class="btn btn-primary">chat</a> --}}
 
-                    <div>{{$A->title}}</div>
-                    <div>{{$A->question}}</div>
-
+                        </div>
+                    </div>
                     @endforeach
 
                     <a href="/userTicket" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Ticket aanmaken</a>

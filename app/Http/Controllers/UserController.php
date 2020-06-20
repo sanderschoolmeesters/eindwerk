@@ -52,20 +52,14 @@ class UserController extends Controller
         $user =  User::find($loggedInUser->id);
         $last=Ticket::orderBy('created_at', 'desc')->take(3)->get()->where('user_id', auth()->user()->id );
         $amount = Ticket::all()->where('user_id', auth()->user()->id );
+        $tickets = Ticket::where('user_id', auth()->user()->id)->get();
 
-        return view('home')->with('user', $user)->with('last',$last)->with('amount',$amount);
+        return view('home')->with('user', $user)->with('last',$last)->with('amount',$amount)->with('tickets', $tickets);
 
 
     }
 
-    public function index() {
 
-
-
-
-         return view('home')->with('amount', $amount);
-
-     }
 
      public function editImageUser(Request $request){
         //validatie
@@ -99,11 +93,5 @@ class UserController extends Controller
         return view('userTickets')->with('tickets', $tickets);
     }
 
-    public function lastTicket(){
 
-
-
-
-        return view('home')->with('last', $last);
-    }
 }

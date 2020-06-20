@@ -103,7 +103,8 @@
 
 
 
-<footer class="footer font-small blue pt-4 fixed-bottom">
+<footer class="footer font-small blue pt-4
+>
 
 
     <div class="container-fluid text-center text-md-left">
