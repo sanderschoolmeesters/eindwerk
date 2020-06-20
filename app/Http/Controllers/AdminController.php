@@ -56,7 +56,7 @@ class AdminController extends Controller
     public function review(Request $request, $user_id) {
         //validatie
         $this->validate($request, [
-            'review' => 'nullable',
+            'review' => 'required',
             'stars' => 'required'
         ]);
 
