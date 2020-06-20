@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -18,19 +18,36 @@
 
                        <h1> Welcome {{$user->name}} </h1>
 
-                        {{-- <div>Actieve tickets: {{count($amount)}}</div> --}}
-
 
 
                     @else
                         <a href="/login">Log in</a> of <a href="/register">maak een account aan.</a>
                     @endif
 
+
+
+
+
+
+
+
                     @if(auth()->user()->role_id == 2)
+
+                    <div>aantal open tickets : {{count($amount)}}</div>
+
+
+                    @foreach ($last as $A)
+
+
+                    <div>{{$A->title}}</div>
+                    <div>{{$A->question}}</div>
+
+                    @endforeach
 
                     <a href="/userTicket" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Ticket aanmaken</a>
 
                     @endif
+
 
                 </div>
             </div>
@@ -38,7 +55,7 @@
 
         @if(auth()->user()->role_id == 2)
 
-        <div class="col-md-4">
+        <div class="col-md-3">
 
             <div class="row">
 
@@ -63,7 +80,7 @@
 
 @else
 
-<div class="col-md-4">
+<div class="col-md-3">
     <div class="row">
 
         <div class="card">

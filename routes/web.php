@@ -34,9 +34,6 @@ Route::get('/home', 'UserController@homeProfile')->middleware('auth');
 
 Route::get('/', 'UserController@homeProfile')->middleware('auth');
 
-// Route::get('/home', 'UserController@index')->middleware('auth');
-
-// Route::get('/', 'UserController@index')->middleware('auth');
 
 Route::get('/adminTicket', 'AdminController@showTicket')->middleware(['auth', 'auth.admin']);
 

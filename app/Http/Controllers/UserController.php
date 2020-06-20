@@ -50,14 +50,21 @@ class UserController extends Controller
     public function homeProfile(){
         $loggedInUser = auth()->user();
         $user =  User::find($loggedInUser->id);
-        return view('home')->with('user', $user);
+        $last=Ticket::orderBy('created_at', 'desc')->take(3)->get();
+        $amount = Ticket::all();
+
+        return view('home')->with('user', $user)->with('last',$last)->with('amount',$amount);
 
 
     }
 
     public function index() {
-         $amount = Ticket::all();
-         return view('home', compact('$amount'));
+
+
+
+
+         return view('home')->with('amount', $amount);
+
      }
 
      public function editImageUser(Request $request){
@@ -91,5 +98,13 @@ class UserController extends Controller
 
         $tickets = Ticket::where('user_id', auth()->user()->id);
         return view('userTickets', ['tickets' => $tickets]);
+    }
+
+    public function lastTicket(){
+
+
+
+
+        return view('home')->with('last', $last);
     }
 }
