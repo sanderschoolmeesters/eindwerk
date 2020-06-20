@@ -4,8 +4,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      {{-- terug naar actieve tickets --}}
+      @if (auth()->user()->role_id == 1)
       <a href="/adminTicket" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Terug naar actieve tickets</a>
+      @else
+      <a href="/userTickets" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Terug naar actieve tickets</a>
+      @endif
       <br>
       <br>
       {{-- chat en ticket verwijderen enkel voor admin --}}
@@ -37,20 +40,22 @@
             @foreach ($conversation as $convo)
                 {{-- Huidig ingeloggde gebruiker eigen naam niet klikbaar maken + admin niks klikbaar --}}
                 @if (auth()->user()->id != $convo->user->id && auth()->user()->role_id == 2)
-                  <p>
+                  <p style="margin:0px 5px 0px 5px;">
                     <a href="/adminProfile/guest/{{$convo->user->id}}">
                     <b>{{$convo->user->name}}</b>
                     </a>: {{$convo->conversation}}
                     <br>
                     <small>{{$convo->created_at}}</small>
                   </p>
+                  <hr>
                 @else
-                  <p>
+                  <p style="margin:5px;">
                     <b>{{$convo->user->name}}</b>: 
                     {{$convo->conversation}}
                     <br>
                     <small>{{$convo->created_at}}</small>
                   </p>
+                  <hr>
                 @endif
               @endforeach
           </div>
