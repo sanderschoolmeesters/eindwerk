@@ -50,8 +50,8 @@ class UserController extends Controller
     public function homeProfile(){
         $loggedInUser = auth()->user();
         $user =  User::find($loggedInUser->id);
-        $last=Ticket::orderBy('created_at', 'desc')->take(3)->get();
-        $amount = Ticket::all();
+        $last=Ticket::orderBy('created_at', 'desc')->take(3)->get()->where('user_id', auth()->user()->id );
+        $amount = Ticket::all()->where('user_id', auth()->user()->id );
 
         return view('home')->with('user', $user)->with('last',$last)->with('amount',$amount);
 
