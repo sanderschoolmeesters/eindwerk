@@ -21,8 +21,6 @@ class UserController extends Controller
 
     public function makeTicket(Request $request){
 
-
-
         Ticket::create([
 
             'id'=> $request->id,
@@ -33,7 +31,8 @@ class UserController extends Controller
 
         ]);//->ticketcategory()->match(request('ticketcategory'));
 
-        return view('userTickets');
+        $tickets = Ticket::where('user_id', Auth()->user()->id)->get();
+        return view('userTickets')->with('tickets', $tickets);
 
                 }
 
